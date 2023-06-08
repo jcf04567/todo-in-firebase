@@ -13,7 +13,6 @@ const getCredential = async (type, user) => {
                           user.email,
                           password);
       await reauthenticateWithCredential(user,credential);
-      console.log('再認証終了');
     } catch(error) {
       console.log(error.code);
       console.log(error);

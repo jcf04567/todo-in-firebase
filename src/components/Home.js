@@ -22,11 +22,9 @@ const Home = () => {
   };
   const handleDelUserClick = () => {
     const result = delUserEmail().then(res => {
-      console.log(res);
       setModalOpen(false);
       res && navigate('/SignUp');
     });
-    console.log(result);
   }
   return (
     <>

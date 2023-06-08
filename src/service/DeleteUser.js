@@ -4,7 +4,6 @@ import { auth } from "./firebase";
 import getCredential from "./GetCredential";
 
 export const delUserEmail = async (email, password) => {
-  // const user = await auth.currentUser;
   const user = auth.currentUser;
 
     await getCredential('email',user);

@@ -12,7 +12,7 @@ const HomeChild = ({ handleDelUserClick, setModalOpen }) => {
         </div>
         <div>
           <button type="button" onClick={() => setModalOpen(false)}>
-            やっぱり退会するの止める
+            やっぱり退会しない
           </button>
         </div>
       </div>
