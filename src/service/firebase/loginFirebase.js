@@ -16,6 +16,10 @@ const loginFirebase = async (email, password) => {
       alert('当該メールアドレスは、ユーザー登録がされていません。');
     } else if (error.code === 'auth/wrong-password') {
       alert('パスワードが不正です');
+    } else if (error.code === 'auth/too-many-requests') {
+      alert('パスワードの入力不正が規定回数を超えました。');
+    } else if (error.code === 'auth/user-disabled') {
+      alert('ユーザが無効になっています。');
     } else {
       alert(`ログインで不正が発生しました。${error.code}`);
     }

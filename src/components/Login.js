@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import loginFirebase from "../service/LoginFirebase";
+import loginFirebase from "../service/firebase/loginFirebase";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -7,7 +7,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const [email, password] = e.target.elements;
-    loginFirebase(email.value, password.value).then(ret => ret && navigate('/'));
+    loginFirebase(email.value, password.value)
+    .then(ret => ret && navigate('/'));
   }
 
   return(

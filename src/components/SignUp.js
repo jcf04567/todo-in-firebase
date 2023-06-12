@@ -1,4 +1,4 @@
-import { mailRegistration } from "../service/Registration";
+import { mailRegistration } from "../service/firebase/registration";
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
