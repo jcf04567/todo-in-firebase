@@ -30,6 +30,7 @@ const SignUp = () => {
             name="password"
             placeholder="password"
           />
+          <p>パスワードは６文字以上にしてください。</p>
         </div>
         <div>
           <button>登録</button>

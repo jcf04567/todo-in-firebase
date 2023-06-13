@@ -28,6 +28,9 @@ const Home = () => {
       <div>
         <div className="modalContainer"></div>
         <h2>ホーム:{user && user.email}</h2>
+        <p>
+          {!user.emailVerified && "アドレス未認証のためTodoは入力できません。"}
+        </p>
         <div>
           <button onClick={handleLogout}>ログアウト</button>
         </div>
