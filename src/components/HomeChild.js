@@ -55,7 +55,6 @@ export const HomePasswordChangeModal = ({
       return;
     }
 
-    //　ここでchangePassword()も発行する。そして、setPasswordChangeModalOpen(false)でモーダルを解く
     await changePassword(oldPassword.value,newPassword.value);
     setPasswordChangeModalOpen(false);
   };
