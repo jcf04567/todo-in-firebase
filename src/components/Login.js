@@ -6,13 +6,15 @@ import { auth } from "../service/firebase/firebase";
 
 const Login = () => {
   const navigate = useNavigate();
+  let goHome = false;
 
   if (isSignInWithEmailLink(auth, window.location.href)) {
     let email = window.localStorage.getItem("emailForSignIn");
     if (!email) {
       email = window.prompt("メールアドレスを入力してください");
     }
-    loginFirebase("mailLink", email).then((ret) => ret && navigate("/"));
+    // loginFirebase("mailLink", email).then((ret) => ret && navigate("/"));
+    loginFirebase("mailLink", email).then((ret) => ret && (goHome = true));
   }
 
   const handleSubmit = (e) => {
@@ -31,43 +33,49 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>ログイン</h2>
-      <form onSubmit={handleSubmit}>
+    <>
+      {goHome ? (
+        navigate("/")
+      ) : (
         <div>
-          <label htmlFor="email">メールアドレス: </label>
-          <input type="email" id="email" name="email" placeholder="email" />
+          <h2>ログイン</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="email">メールアドレス: </label>
+              <input type="email" id="email" name="email" placeholder="email" />
+            </div>
+            <div>
+              <label htmlFor="password">パスワード: </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="password"
+              />
+            </div>
+            <div>
+              <button>ログイン</button>
+            </div>
+          </form>
+          <form onSubmit={handleMailLink}>
+            メールリンクによるログインはこちらをクリック
+            <div>
+              <label htmlFor="emailLink">メールアドレス: </label>
+              <input
+                type="email"
+                id="emailLink"
+                name="emailLink"
+                placeholder="email"
+              />
+            </div>
+            <button>メール送信</button>
+          </form>
+          <div>
+            ユーザー登録は<Link to={"/signup"}>こちら</Link>から
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">パスワード: </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="password"
-          />
-        </div>
-        <div>
-          <button>ログイン</button>
-        </div>
-      </form>
-      <form onSubmit={handleMailLink}>
-        メールリンクによるログインはこちらをクリック
-        <div>
-          <label htmlFor="emailLink">メールアドレス: </label>
-          <input
-            type="email"
-            id="emailLink"
-            name="emailLink"
-            placeholder="email"
-          />
-        </div>
-        <button>メール送信</button>
-      </form>
-      <div>
-        ユーザー登録は<Link to={"/signup"}>こちら</Link>から
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
