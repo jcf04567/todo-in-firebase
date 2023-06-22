@@ -7,10 +7,10 @@ import { auth } from "./firebase";
 const sendEmailLink = async (email) => {
 
 
-  const REDIRECT_URL = process.env.REACT_APP_REDIRECT_URL;
+  const REDIRECT_URL_LOGIN = process.env.REACT_APP_REDIRECT_URL_LOGIN;
 
   const actionCodeSettings = {
-    url: REDIRECT_URL,
+    url: REDIRECT_URL_LOGIN,
     handleCodeInApp: true,
   }
 
