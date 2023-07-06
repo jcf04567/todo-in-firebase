@@ -18,6 +18,7 @@ const Home = () => {
   const [passwordChangeModalOpen, setPasswordChangeModalOpen] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuthContext();
+  console.log(user);
   const handleLogout = () => {
     signOut(auth);
     navigate("/login");
@@ -27,9 +28,21 @@ const Home = () => {
     <>
       <div>
         <div className="modalContainer"></div>
-        <h2>ホーム:{user && user.email}</h2>
+        <h2>
+          <p>Home</p>
+          <p>{`email:${user.email}`}</p>
+          <p>
+            Provider :
+            {user.providerData[0].providerId === "password"
+            ? "email Login"
+            : user.providerData[0].providerId === "google.com"
+            ? "Google"
+            : "invalid provider"}
+          </p>
+        </h2>
         <p>
-          {!user.emailVerified && "アドレス未認証のためTodoは入力できません。(メール認証が終了したら、リロードしてください。)"}
+          {!user.emailVerified &&
+            "アドレス未認証のためTodoは入力できません。(メール認証が終了したら、リロードしてください。)"}
         </p>
         <div>
           <button onClick={handleLogout}>ログアウト</button>
@@ -38,7 +51,9 @@ const Home = () => {
           <button onClick={() => setWithdrawalModalOpen(true)}>退会</button>
         </div>
         <div>
-          <button onClick={() => setPasswordChangeModalOpen(true)}>パスワード変更</button>
+          <button onClick={() => setPasswordChangeModalOpen(true)}>
+            パスワード変更
+          </button>
         </div>
       </div>
       {withdrawalModalOpen && (

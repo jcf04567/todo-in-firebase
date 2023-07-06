@@ -1,29 +1,49 @@
-// import { auth } from "./firebase";
-import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
+import {
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  GoogleAuthProvider,
+  getRedirectResult,
+  signInWithRedirect,
+  signInWithCredential,
+  onIdTokenChanged,
+  signInWithPopup,
+  updateCurrentUser,
+  } from "firebase/auth";
+import { auth, googleProvider } from "./firebase";
 
+const getCredential = async (type, user, pass = null) => {
+  let credential;
+  if (type === "email") {
+    let password;
+    pass
+      ? (password = pass)
+      : (password = prompt("パスワードを入力してください"));
+    if (!password) {
+      return false;
+    }
+    // email用Credentialを求める
+    credential = await EmailAuthProvider.credential(user.email, password);
 
-const getCredential = async (type, user, pass=null) => {
+    return true;
+  } else if (type === "google") {
 
-  let password;
-  pass ? password = pass : password = prompt('パスワードを入力してください');
-  if (!password) {
+    // const oldIdToken = await auth.currentUser.getIdToken();
+    // console.log(`old IdToken:${oldIdToken}`);
+    const newIdToken = await auth.currentUser.getIdToken(true);
+    console.log(`new IdToken:${newIdToken}`);
+
+    user = auth.currentUser;
+    credential = await GoogleAuthProvider.credential(newIdToken);
+    // await updateCurrentUser(user);
+    // credential = await GoogleAuthProvider.credential(user.getIdToken());
+  } else {
+    console.log("不当な認証情報要求です");
     return false;
   }
-  if (type === 'email') {
-    // email用Credentialを求める
-      const credential = await EmailAuthProvider.credential(
-                          user.email,
-                          password);
-      await reauthenticateWithCredential(user,credential);
-  } else if(type === 'google') {
-    // google用Credentialを求める
-  } else {
-    console.log('不当な認証情報要求です');
-    return false
-  }
-
+  console.log(user);
+  console.log(credential);
+  await reauthenticateWithCredential(user, credential);
   return true;
-
-}
+};
 
 export default getCredential;

@@ -1,17 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { delUserEmail } from "../service/authenticationProcess/deleteUser";
+import { delUser } from "../service/authenticationProcess/delUser";
 import changePassword from "../service/authenticationProcess/changPassword";
 import "./styles/portal.css";
 import { issueMsg } from "../service/common/issueMsg";
+import { auth } from "../service/firebase/firebase";
 
-export const HomeWithdrawalChild = ({
-  setWithdrawalModalOpen,
-}) => {
+export const HomeWithdrawalChild = ({ setWithdrawalModalOpen }) => {
   const navigate = useNavigate();
+  const user = auth.currentUser;
+
   const handleDelUserClick = () => {
-    delUserEmail().then((res) => {
+    delUser().then((res) => {
       setWithdrawalModalOpen(false);
-      res && navigate("/SignUp");
+      res && user.providerData[0].providerId === "password"
+        ? navigate("/SignUp")
+        : navigate("/Login");
     });
   };
   return (
@@ -33,10 +36,7 @@ export const HomeWithdrawalChild = ({
   );
 };
 
-export const HomePasswordChangeModal = ({
-  setPasswordChangeModalOpen,
-}) => {
-
+export const HomePasswordChangeModal = ({ setPasswordChangeModalOpen }) => {
   const handleChangePassword = async (e) => {
     e.preventDefault();
     const [oldPassword, newPassword, sameNewPassword] = e.target.elements;
@@ -46,22 +46,24 @@ export const HomePasswordChangeModal = ({
     } else if (!newPassword.value) {
       issueMsg("「新しいパスワード」が入力されていません");
       return;
-    }else if (!sameNewPassword.value) {
+    } else if (!sameNewPassword.value) {
       issueMsg("「新しいパスワードをもう一度」が入力されていません");
       return;
     }
     if (newPassword.value !== sameNewPassword.value) {
-      issueMsg("「新しいパスワード」と「新しいパスワードをもう一度」が不一致です");
+      issueMsg(
+        "「新しいパスワード」と「新しいパスワードをもう一度」が不一致です"
+      );
       return;
     }
 
-    await changePassword(oldPassword.value,newPassword.value);
+    await changePassword(oldPassword.value, newPassword.value);
     setPasswordChangeModalOpen(false);
   };
   return (
     <div className="modal">
       <div className="modal__content">
-        <form onSubmit={ handleChangePassword }>
+        <form onSubmit={handleChangePassword}>
           <div>
             <label htmlFor="oldPassword">
               今までのパスワード
