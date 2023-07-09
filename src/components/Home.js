@@ -6,7 +6,11 @@ import { HomePasswordChangeModal, HomeWithdrawalChild } from "./HomeChild";
 import { auth } from "../service/firebase/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
-import "./styles/home.css";
+import Title from "./Title";
+import { Button } from "@mui/material";
+import { Logout } from "@mui/icons-material";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 
 const ModalPortal = ({ children }) => {
   const target = document.querySelector(".modalContainer");
@@ -27,34 +31,44 @@ const Home = () => {
   return (
     <>
       <div>
+        <Title />
         <div className="modalContainer"></div>
-        <h2>
-          <p>Home</p>
-          <p>{`email:${user.email}`}</p>
-          <p>
-            Provider :
-            {user.providerData[0].providerId === "password"
+        <p>現在ログインしているユーザーの情報</p>
+        <p>email : {user.email}</p>
+        <p>
+          Provider :
+          {user.providerData[0].providerId === "password"
             ? "email Login"
             : user.providerData[0].providerId === "google.com"
             ? "Google"
             : "invalid provider"}
-          </p>
-        </h2>
+        </p>
         <p>
           {!user.emailVerified &&
             "アドレス未認証のためTodoは入力できません。(メール認証が終了したら、リロードしてください。)"}
         </p>
-        <div>
-          <button onClick={handleLogout}>ログアウト</button>
-        </div>
-        <div>
-          <button onClick={() => setWithdrawalModalOpen(true)}>退会</button>
-        </div>
-        <div>
-          <button onClick={() => setPasswordChangeModalOpen(true)}>
+          <Button
+            onClick={handleLogout}
+            variant="outlined"
+            startIcon={<Logout />}
+            sx={{ mr:1 }}
+          >
+            ログアウト
+          </Button>
+          <Button
+            onClick={() => setWithdrawalModalOpen(true)}
+            variant="outlined"
+            startIcon={<PersonRemoveIcon />}
+            sx={{ mr:1 }}
+          >
+            退会
+          </Button>
+          <Button onClick={() => setPasswordChangeModalOpen(true)}
+            variant="outlined"
+            startIcon={<PublishedWithChangesIcon />}
+          >
             パスワード変更
-          </button>
-        </div>
+          </Button>
       </div>
       {withdrawalModalOpen && (
         <ModalPortal>

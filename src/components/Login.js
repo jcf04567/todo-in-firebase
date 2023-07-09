@@ -1,12 +1,16 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { isSignInWithEmailLink } from "firebase/auth";
+
+import { Input, Button } from "@mui/material";
+import LoginIcon from "@mui/icons-material/Login";
+import EmailIcon from "@mui/icons-material/Email";
+
 import loginFirebase from "../service/firebase/loginFirebase";
 import sendEmailLink from "../service/firebase/sendEmailLink";
-import { isSignInWithEmailLink, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../service/firebase/firebase";
 import submitPasswordResetEmail from "../service/firebase/submitPasswordResetEmail";
-import { issueMsg } from "../service/common/issueMsg";
-
+import Title from "./Title";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,7 +35,6 @@ const Login = () => {
   const handleMailLink = (e) => {
     e.preventDefault();
     const [emailLink] = e.target.elements;
-
     sendEmailLink(emailLink.value);
   };
 
@@ -41,22 +44,9 @@ const Login = () => {
     submitPasswordResetEmail(resetEmail.value);
   };
 
-  const handleGoogleLogin = async(e) => {
-    try{
-      // ここでFirebaseにアクセスするのはダメ。
-      // firebaseフォルダのloginProvider(auth,provider)をコールするようにする。
-      // 成功したら、”/”に遷移する。
-      await signInWithPopup(auth, googleProvider);
-    } catch(error) {
-      if (error.code === 'auth/popup-closed-by-user') {
-        issueMsg('GoogleIdでのログインがキャンセルされました。');
-        navigate("/");
-      } else {
-        console.log(error.code);
-        alert(error.message);
-      }
-    }
-  }
+  const handleGoogleLogin = async (e) => {
+    loginFirebase("google", googleProvider).then((ret) => ret && navigate("/"));
+  };
 
   return (
     <>
@@ -64,57 +54,85 @@ const Login = () => {
         navigate("/")
       ) : (
         <div>
+          <Title />
           <h2>ログイン</h2>
           <div className="login-type">
             <h3>メールでログイン</h3>
             <form onSubmit={handleLogin}>
               <div>
                 <label htmlFor="email">メールアドレス: </label>
-                <input
+                {/* <input
                   type="email"
                   id="email"
                   name="email"
                   placeholder="email"
+                /> */}
+                <Input
+                  id="email"
+                  name="email"
+                  placeholder="email"
+                  type="email"
                 />
               </div>
               <div>
                 <label htmlFor="password">パスワード: </label>
-                <input
+                <Input
                   type="password"
                   id="password"
                   name="password"
                   placeholder="password"
                 />
               </div>
-              <div>
-                <button>ログイン</button>
+              <div style={{ margin: "5px 0" }}>
+                <Button
+                  variant="outlined"
+                  startIcon={<LoginIcon />}
+                  type="submit"
+                >
+                  ログイン
+                </Button>
               </div>
             </form>
             <form onSubmit={handleMailLink}>
               メールリンクによるログインはこちらをクリック
               <div>
                 <label htmlFor="emailLink">メールアドレス: </label>
-                <input
+                <Input
                   type="email"
                   id="emailLink"
                   name="emailLink"
                   placeholder="email"
                 />
               </div>
-              <button>メール送信</button>
+              <div style={{ margin: "5px 0" }}>
+                <Button
+                  variant="outlined"
+                  endIcon={<EmailIcon />}
+                  type="submit"
+                >
+                  メール送信
+                </Button>
+              </div>
             </form>
             <form onSubmit={handlePasswordRest}>
               パスワードを忘れた方はパスワードリセットのメールを送信します。
               <div>
                 <label htmlFor="passwordRest">メールアドレス: </label>
-                <input
+                <Input
                   type="email"
                   id="passwordRest"
                   name="passwordRest"
                   placeholder="email"
                 />
               </div>
-              <button>メール送信</button>
+              <div style={{ margin: "5px 0" }}>
+                <Button
+                    variant="outlined"
+                    endIcon={<EmailIcon />}
+                    type="submit"
+                >メール送信
+                </Button>
+              </div>
             </form>
             <div>
               ユーザー登録は<Link to={"/signup"}>こちら</Link>から
@@ -122,7 +140,11 @@ const Login = () => {
           </div>
           <div className="login-type">
             <h3>Googleでログイン</h3>
-            <img onClick={handleGoogleLogin} src={`${process.env.PUBLIC_URL}/btn_google_signin_light_focus_web.png`} alt="Googlでログインのアイコン"/>
+            <img
+              onClick={handleGoogleLogin}
+              src={`${process.env.PUBLIC_URL}/btn_google_signin_light_focus_web.png`}
+              alt="Googlでログインのアイコン"
+            />
           </div>
         </div>
       )}

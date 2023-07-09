@@ -2,14 +2,8 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
   GoogleAuthProvider,
-  getRedirectResult,
-  signInWithRedirect,
-  signInWithCredential,
-  onIdTokenChanged,
-  signInWithPopup,
-  updateCurrentUser,
   } from "firebase/auth";
-import { auth, googleProvider } from "./firebase";
+import { auth } from "./firebase";
 
 const getCredential = async (type, user, pass = null) => {
   let credential;

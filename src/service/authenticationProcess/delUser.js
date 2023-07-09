@@ -1,10 +1,10 @@
 import {
   deleteUser,
-  signInWithPopup,
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase/firebase";
 import getCredential from "../firebase/getCredential";
 import { issueMsg } from "../common/issueMsg";
+import loginFirebase from "../firebase/loginFirebase";
 
 export const delUser = async () => {
   const user = auth.currentUser;
@@ -25,7 +25,8 @@ export const delUser = async () => {
       );
       try {
         // ポップアップウインドウが表示
-        await signInWithPopup(auth, googleProvider);
+        // await signInWithPopup(auth, googleProvider);
+        await loginFirebase("google",googleProvider);
         const newUser = auth.currentUser;
         const newUserEmail = newUser.email;
         await deleteUser(newUser);
@@ -50,7 +51,6 @@ export const delUser = async () => {
           return false;
         }
       }
-
       /******  Google認証の退会処理終了 *******/
     } else {
       issueMsg(

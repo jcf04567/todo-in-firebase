@@ -1,13 +1,13 @@
-import { signInWithEmailAndPassword, signInWithEmailLink } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithEmailLink, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase";
 import { issueMsg } from "../common/issueMsg";
 
-const loginFirebase = async (type,email, password = null) => {
+const loginFirebase = async (type,loginProvider, password = null) => {
   if (type === 'email' ){
     try {
       await signInWithEmailAndPassword(
         auth,
-        email,
+        loginProvider,
         password
       );
       // メール認証済みかどうかをチェック　メール認証
@@ -31,9 +31,20 @@ const loginFirebase = async (type,email, password = null) => {
     }
   } else if(type === 'mailLink') {
     try {
-      await signInWithEmailLink(auth, email, window.location.href);
+      await signInWithEmailLink(auth, loginProvider, window.location.href);
     } catch(error) {
       issueMsg('メール認証ログインに失敗しました',error.code)
+    }
+  } else if(type === 'google') {
+    try{
+      await signInWithPopup(auth, loginProvider);
+    } catch(error) {
+      if (error.code === 'auth/popup-closed-by-user') {
+        issueMsg('GoogleIdでのログインがキャンセルされました。');
+      } else {
+        console.log(error.code);
+        alert(error.message);
+      }
     }
   }
 }
