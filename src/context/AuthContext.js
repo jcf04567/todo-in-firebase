@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <>
-    {loading ? (<p>Loading...</p>) :
+    {loading ? (<p>しばらくお待ちください...</p>) :
       <AuthContext.Provider value={value}>
         {children}
       </AuthContext.Provider>

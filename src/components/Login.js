@@ -23,7 +23,6 @@ const Login = () => {
     }
     loginFirebase("mailLink", email).then((ret) => ret && (goHome = true));
   }
-
   const handleLogin = (e) => {
     e.preventDefault();
     const [loginEmail, loginPassword] = e.target.elements;

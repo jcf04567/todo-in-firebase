@@ -22,7 +22,6 @@ const Home = () => {
   const [passwordChangeModalOpen, setPasswordChangeModalOpen] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuthContext();
-  console.log(user);
   const handleLogout = () => {
     signOut(auth);
     navigate("/login");

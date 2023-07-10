@@ -10,10 +10,12 @@ import PublicRoute from "./components/PublicRoute";
 import { Container } from "@mui/material";
 
 function App() {
+  const URL_PASS = process.env.REACT_APP_URL_PASS;
+  console.log(URL_PASS);
   return (
     <AuthProvider>
       <Container maxWidth="sm">
-        <BrowserRouter>
+        <BrowserRouter  basename={URL_PASS}>
           <Routes>
             <Route
               path="/"
