@@ -7,11 +7,12 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
+import { Container } from "@mui/material";
 
 function App() {
   return (
     <AuthProvider>
-      <div style={{ margin: "0 auto" , maxWidth: "80%"}}>
+      <Container maxWidth="sm">
         <BrowserRouter>
           <Routes>
             <Route
@@ -28,7 +29,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </div>
+      </Container>
     </AuthProvider>
   );
 }
