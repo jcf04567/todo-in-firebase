@@ -62,12 +62,13 @@ const Home = () => {
           >
             退会
           </Button>
-          <Button onClick={() => setPasswordChangeModalOpen(true)}
+          {user.providerData[0].providerId === "password"
+          && <Button onClick={() => setPasswordChangeModalOpen(true)}
             variant="outlined"
             startIcon={<PublishedWithChangesIcon />}
           >
             パスワード変更
-          </Button>
+          </Button> }
       </div>
       {withdrawalModalOpen && (
         <ModalPortal>

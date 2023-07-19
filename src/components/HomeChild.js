@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { delUser } from "../service/authenticationProcess/delUser";
-import changePassword from "../service/authenticationProcess/changPassword";
+import changePassword from "../service/authenticationProcess/changePassword";
 import "./styles/portal.css";
 import { issueMsg } from "../service/common/issueMsg";
 import { auth } from "../service/firebase/firebase";

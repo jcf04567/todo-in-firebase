@@ -22,6 +22,8 @@ const Login = () => {
       email = window.prompt("メールアドレスを入力してください");
     }
     loginFirebase("mailLink", email).then((ret) => ret && (goHome = true));
+  } else {
+
   }
   const handleLogin = (e) => {
     e.preventDefault();
@@ -37,7 +39,7 @@ const Login = () => {
     sendEmailLink(emailLink.value);
   };
 
-  const handlePasswordRest = (e) => {
+  const handlePasswordReset = (e) => {
     e.preventDefault();
     const [resetEmail] = e.target.elements;
     submitPasswordResetEmail(resetEmail.value);
@@ -60,12 +62,6 @@ const Login = () => {
             <form onSubmit={handleLogin}>
               <div>
                 <label htmlFor="email">メールアドレス: </label>
-                {/* <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                /> */}
                 <Input
                   id="email"
                   name="email"
@@ -113,7 +109,7 @@ const Login = () => {
                 </Button>
               </div>
             </form>
-            <form onSubmit={handlePasswordRest}>
+            <form onSubmit={handlePasswordReset}>
               パスワードを忘れた方はパスワードリセットのメールを送信します。
               <div>
                 <label htmlFor="passwordRest">メールアドレス: </label>
