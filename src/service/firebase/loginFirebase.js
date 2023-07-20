@@ -10,7 +10,6 @@ const loginFirebase = async (type,loginProvider, password = null) => {
         loginProvider,
         password
       );
-      // メール認証済みかどうかをチェック　メール認証
       return true;
     } catch (error) {
       if (error.code === 'auth/invalid-email') {
