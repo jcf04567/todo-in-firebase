@@ -1,6 +1,5 @@
 {
-  "homepage": "/portfolios/react-and-firebase-mail-and-google-auth/",
-  "name": "react-and-firebase-mail-and-google-auth",
+  "name": "todo-in-firebase",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

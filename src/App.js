@@ -27,6 +27,7 @@ function App() {
             <Route element={<PublicRoute />}>
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
+              <Route path="*" element={<div><h2>404　ページが見つかりません。</h2></div>} />
             </Route>
           </Routes>
         </BrowserRouter>
