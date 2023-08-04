@@ -1,5 +1,5 @@
 import { mailRegistration } from "../service/firebase/registration";
-import { useAuthContext } from "../context/AuthContext";
+import { useTodoContext } from "../context/TodoContext";
 import { useNavigate } from "react-router-dom";
 import Title from "./Title";
 
@@ -9,7 +9,7 @@ import SendIcon from "@mui/icons-material/Send";
 
 
 const SignUp = () => {
-  const { user } = useAuthContext();
+  const { user } = useTodoContext();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

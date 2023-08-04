@@ -14,6 +14,13 @@ export const delUser = async () => {
     // ここで、ログインしているプロバイダーを判断する
     if (user.providerData[0].providerId === "password") {
       loginProvider = "email";
+      const result = await getCredential(loginProvider, user);
+      if (!result) {
+        return false;
+      }
+      await deleteUser(user);
+      issueMsg("退会処理が完了しました。：", user.email);
+      return true;
     } else if (user.providerData[0].providerId === "google.com") {
       loginProvider = "google";
       /******* Google認証の退会処理開始 *******/
@@ -59,13 +66,7 @@ export const delUser = async () => {
       );
       return false;
     }
-    const result = await getCredential(loginProvider, user);
-    if (!result) {
-      return false;
-    }
-    await deleteUser(user);
-    issueMsg("退会処理が完了しました。：", user.email);
-    return true;
+
   } catch (error) {
     if (error.code === "auth/wrong-password") {
       issueMsg("入力したパスワードが不正です。");

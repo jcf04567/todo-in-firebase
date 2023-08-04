@@ -4,7 +4,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { HomePasswordChangeModal, HomeWithdrawalChild } from "./HomeChild";
 import { auth } from "../service/firebase/firebase";
-import { useAuthContext } from "../context/AuthContext";
+import { useTodoContext } from "../context/TodoContext";
 
 import Title from "./Title";
 import { Button } from "@mui/material";
@@ -21,7 +21,7 @@ const Home = () => {
   const [withdrawalModalOpen, setWithdrawalModalOpen] = useState(false);
   const [passwordChangeModalOpen, setPasswordChangeModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { user } = useAuthContext();
+  const { user } = useTodoContext();
   const handleLogout = () => {
     signOut(auth);
     navigate("/login");

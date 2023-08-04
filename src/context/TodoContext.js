@@ -2,11 +2,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../service/firebase/firebase";
 
-const AuthContext = createContext();
+const TodoContext = createContext();
 
-export const useAuthContext = () => useContext(AuthContext);
+export const useTodoContext = () => useContext(TodoContext);
 
-export const AuthProvider = ({ children }) => {
+export const TodoProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -27,9 +27,9 @@ export const AuthProvider = ({ children }) => {
   return (
     <>
     {loading ? (<p>しばらくお待ちください...</p>) :
-      <AuthContext.Provider value={value}>
+      <TodoContext.Provider value={value}>
         {children}
-      </AuthContext.Provider>
+      </TodoContext.Provider>
     }
     </>
   );

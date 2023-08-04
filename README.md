@@ -10,6 +10,7 @@ note
   本番用のコンパイルでは、package_pro.jsonをpackage.jsonとリネームする。
   開発環境のコンパイルでは、package_dev.jsonをpackage.jsonとリネームする。
   ※package.jsonの一本化の方法が分からなかった。
+  
 2.react-and-firebase-mail-and-google-authとfiewbaseのアプリが同じ。
   将来別のfiewbaseのアプリにするかも。
 

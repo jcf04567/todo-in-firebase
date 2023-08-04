@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext"
+import { useTodoContext } from "../context/TodoContext"
 
 
 const PublicRoute = ({children}) => {
-  const {user} = useAuthContext();
+  const {user} = useTodoContext();
   return(
     <>
       {user ? (<Navigate to="/"/>) : <Outlet />}
