@@ -10,7 +10,7 @@ import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 
 import { useTodoContext } from "../context/TodoContext";
 
-const AuthBUtton = ({ setWithdrawalModalOpen, setPasswordChangeModalOpen}) => {
+const AuthButton = ({ setWithdrawalModalOpen, setPasswordChangeModalOpen}) => {
   const { user } = useTodoContext();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -48,4 +48,4 @@ const AuthBUtton = ({ setWithdrawalModalOpen, setPasswordChangeModalOpen}) => {
   );
 };
 
-export default AuthBUtton;
+export default AuthButton;

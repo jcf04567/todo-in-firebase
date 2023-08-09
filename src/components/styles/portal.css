@@ -72,14 +72,3 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-
-/* 共通css */
-.btn {
-  margin-top: 10px;
-  background-color: pink;
-  border:none;
-  border-radius: 5px;
-}
-.link-css {
-  margin-top: 10px;
-}
