@@ -5,6 +5,8 @@ import { signOut } from "firebase/auth";
 
 import { Button } from "@mui/material";
 import { Logout } from "@mui/icons-material";
+import { Stack } from '@mui/material';
+
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 
@@ -18,7 +20,7 @@ const AuthButton = ({ setWithdrawalModalOpen, setPasswordChangeModalOpen}) => {
     navigate("/login");
   };
   return (
-    <>
+    <Stack direction={'row'}>
       <Button
         onClick={handleLogout}
         variant="outlined"
@@ -44,7 +46,7 @@ const AuthButton = ({ setWithdrawalModalOpen, setPasswordChangeModalOpen}) => {
           パスワード変更
         </Button>
       )}
-    </>
+    </Stack>
   );
 };
 

@@ -1,10 +1,9 @@
 
-
 const Title = () => {
 
   return(
     <>
-      <h1>予定表</h1>
+      <h2>Todoリスト</h2>
     </>
   )
 }

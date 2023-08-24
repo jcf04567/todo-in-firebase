@@ -1,3 +1,5 @@
+import { Stack } from '@mui/material';
+
 const List = ({ todos, deleteTodo }) => {
 
   const complete = (id) => {
@@ -5,7 +7,7 @@ const List = ({ todos, deleteTodo }) => {
   }
 
   return (
-    <div>
+    <Stack spacing={1}>
       {todos.map((todo) => {
         return (
           <div key={todo.id}>
@@ -14,7 +16,7 @@ const List = ({ todos, deleteTodo }) => {
           </div>
         );
       })}
-    </div>
+    </Stack>
   );
 };
 
