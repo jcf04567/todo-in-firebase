@@ -4,11 +4,7 @@ import { auth } from "../service/firebase/firebase";
 import { signOut } from "firebase/auth";
 
 import { Button } from "@mui/material";
-import { Logout } from "@mui/icons-material";
 import { Stack } from '@mui/material';
-
-import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
-import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 
 import { useTodoContext } from "../context/TodoContext";
 
@@ -20,28 +16,26 @@ const AuthButton = ({ setWithdrawalModalOpen, setPasswordChangeModalOpen}) => {
     navigate("/login");
   };
   return (
-    <Stack direction={'row'}>
+    <Stack direction="row" justifyContent="flex-end" >
       <Button
         onClick={handleLogout}
-        variant="outlined"
-        startIcon={<Logout />}
-        sx={{ mr: 1 }}
+        variant="inherit"
+        sx={{ fontSize: { xs: 8, sm:12, md:14 } }}
       >
         ログアウト
       </Button>
       <Button
         onClick={() => setWithdrawalModalOpen(true)}
-        variant="outlined"
-        startIcon={<PersonRemoveIcon />}
-        sx={{ mr: 1 }}
+        variant="inherit"
+        sx={{ fontSize: { xs: 8, sm:12, md:14 } }}
       >
         退会
       </Button>
       {user.providerData[0].providerId === "password" && (
         <Button
           onClick={() => setPasswordChangeModalOpen(true)}
-          variant="outlined"
-          startIcon={<PublishedWithChangesIcon />}
+          variant="inherit"
+          sx={{ fontSize: { xs: 8, sm:12, md:14 } }}
         >
           パスワード変更
         </Button>

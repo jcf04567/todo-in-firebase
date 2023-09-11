@@ -33,8 +33,8 @@ const Todo = () => {
 
   return (
     <>
-      <List todos={todos} deleteTodo={deleteTodo}/>
       <Form createTodo={createTodo}/>
+      <List todos={todos} deleteTodo={deleteTodo}/>
     </
     >
   );

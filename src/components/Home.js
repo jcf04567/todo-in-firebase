@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useTodoContext } from "../context/TodoContext";
 
-import Title from "./Title";
-import AuthButton from "./AuthButton";
+import Header from "./Header";
 import UserInfo from "./UserInfo";
 import Modals from "./Modals";
 import Todo from "./todo/Todo";
+import { styled } from "@mui/material";
+
+const TodoDiv = styled("div")(() => ({
+  marginTop: 10,
+}));
 
 const Home = () => {
   const [withdrawalModalOpen, setWithdrawalModalOpen] = useState(false);
@@ -16,14 +20,13 @@ const Home = () => {
   return (
     <>
       <div>
-        <Title />
-        <AuthButton
+        <Header
           setWithdrawalModalOpen={setWithdrawalModalOpen}
           setPasswordChangeModalOpen={setPasswordChangeModalOpen}
         />
-        <div>
+        <TodoDiv>
           <Todo />
-        </div>
+        </TodoDiv>
         <div className="modalContainer"></div>
         <UserInfo user={user} />
       </div>

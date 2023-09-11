@@ -10,7 +10,7 @@ import loginFirebase from "../service/firebase/loginFirebase";
 import sendEmailLink from "../service/firebase/sendEmailLink";
 import { auth, googleProvider } from "../service/firebase/firebase";
 import submitPasswordResetEmail from "../service/firebase/submitPasswordResetEmail";
-import Title from "./Title";
+import Header from "./Header";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const Login = () => {
         navigate("/")
       ) : (
         <div>
-          <Title />
+          <Header />
           <h2>ログイン</h2>
           <div className="login-type">
             <h3>メールでログイン</h3>

@@ -1,11 +1,11 @@
-import Title from "./Title";
+import Header from "./Header";
 
 
 const NotFound = () => {
 
   return(
     <>
-      <Title />
+      <Header />
       <h2>404 当該ページは存在しません</h2>
     </>
   )

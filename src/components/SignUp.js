@@ -1,7 +1,7 @@
 import { mailRegistration } from "../service/firebase/registration";
 import { useTodoContext } from "../context/TodoContext";
 import { useNavigate } from "react-router-dom";
-import Title from "./Title";
+import Header from "./Header";
 
 import { Button, Input } from "@mui/material";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
@@ -21,7 +21,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <Title />
+      <Header />
       <h2>ユーザー登録 {user && user.email}</h2>
       <form onSubmit={handleSubmit}>
         <div>
